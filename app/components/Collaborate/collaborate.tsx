@@ -6,7 +6,7 @@ export default function Collaboration() {
             name: 'CUSTOM TEE', 
             price: 'R427.42', 
             soldOut: false,
-            imageUrl: 'https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+            imageUrl: '/Bradley-Saint.png'
         },
         { 
             name: 'DESIGNER LONG SLEEVE', 
@@ -39,7 +39,7 @@ export default function Collaboration() {
                 </div>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
                     {collaborationItems.map((item, index) => (
-                        <div key={index} className="group cursor-pointer">
+                        <div key={index} className="group cursor-pointer shadow-lg p-3">
                             <div className="aspect-square bg-gray-100 mb-2 sm:mb-3 overflow-hidden">
                                 <img 
                                     src={item.imageUrl} 

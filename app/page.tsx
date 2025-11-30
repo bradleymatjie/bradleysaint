@@ -2,7 +2,7 @@ import { ChevronRight } from 'lucide-react';
 import BestSeller from './components/bestSeller/bestSeller';
 import Collaboration from './components/Collaborate/collaborate';
 
-export default function PrintWavesWebsite() {
+export default function Page() {
 
   return (
     <div className="min-h-screen bg-white">
@@ -25,7 +25,7 @@ export default function PrintWavesWebsite() {
             </div>
             <div className="relative h-[300px] sm:h-[400px] lg:h-[600px] bg-gray-900 order-2 lg:order-2">
               <img 
-                src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&h=600&fit=crop" 
+                src="/Bradley-Saint.png" 
                 alt="Custom T-shirt Design"
                 className="w-full h-full object-cover opacity-90"
               />
@@ -97,20 +97,6 @@ export default function PrintWavesWebsite() {
                   </button>
                 </div>
               </div>
-            </div>
-          </div>
-
-          {/* Gallery Grid */}
-          <div className="mb-8">
-            <h2 className="text-2xl sm:text-3xl font-black text-center mb-6 sm:mb-8">#PRINTWAVESSTYLE</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-              {[...Array(12)].map((_, i) => (
-                <div key={i} className="aspect-square bg-gray-900 hover:opacity-80 transition-opacity cursor-pointer">
-                  <div className="w-full h-full flex items-center justify-center text-white text-xl sm:text-2xl">
-                    📸
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
         </div>

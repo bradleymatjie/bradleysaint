@@ -33,7 +33,7 @@ export default function Footer() {
               </ul>
             </div>
             <div>
-              <h3 className="font-bold mb-3 sm:mb-4 text-xs sm:text-sm">ABOUT PRINTWAVES</h3>
+              <h3 className="font-bold mb-3 sm:mb-4 text-xs sm:text-sm">ABOUT Bradley Saint</h3>
               <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-gray-400">
                 <li><a href="#" className="hover:text-white">OUR STORY</a></li>
                 <li><a href="#" className="hover:text-white">SUSTAINABILITY</a></li>
@@ -44,8 +44,8 @@ export default function Footer() {
           </div>
           <div className="border-t border-gray-800 pt-6 sm:pt-8">
             <div className="text-center">
-              <div className="text-3xl sm:text-4xl lg:text-6xl font-black mb-3 sm:mb-4 opacity-20">PrintWaves</div>
-              <p className="text-xs text-gray-500">© 2024 PRINTWAVES. ALL RIGHTS RESERVED.</p>
+              <div className="text-3xl sm:text-4xl lg:text-6xl font-black mb-3 sm:mb-4 opacity-20">Bradley Saint</div>
+              <p className="text-xs text-gray-500">© 2024 Bradley Saint. ALL RIGHTS RESERVED.</p>
             </div>
           </div>
         </div>

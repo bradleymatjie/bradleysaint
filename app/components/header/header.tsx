@@ -4,7 +4,7 @@ export default function Header() {
     return (
         <header className="border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-          <div className="text-xl sm:text-2xl font-black">PrintWaves</div>
+          <div className="text-xl sm:text-2xl font-black">Bradley <i>Saint</i></div>
           <nav className="hidden lg:flex gap-4 xl:gap-8">
             <a href="#" className="text-xs sm:text-sm font-medium hover:underline">NEW DROP</a>
             <a href="#" className="text-xs sm:text-sm font-medium hover:underline">CATALOG</a>
