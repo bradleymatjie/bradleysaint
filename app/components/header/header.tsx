@@ -7,9 +7,9 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <Link href="/" className="text-xl sm:text-2xl font-black">The Village</Link>
           <nav className="hidden lg:flex gap-4 xl:gap-8">
-            <a href="#" className="text-xs sm:text-sm font-medium hover:underline">NEW DROP</a>
-            <a href="#" className="text-xs sm:text-sm font-medium hover:underline">CATALOG</a>
-            <a href="#" className="text-xs sm:text-sm font-medium hover:underline">ABOUT</a>
+            <Link href="#" className="text-xs sm:text-sm font-medium hover:underline">NEW DROP</Link>
+            <Link href="/products" className="text-xs sm:text-sm font-medium hover:underline">CATALOG</Link>
+            <Link href="#" className="text-xs sm:text-sm font-medium hover:underline">ABOUT</Link>
           </nav>
           <div className="flex items-center gap-3 sm:gap-4">
             <Search className="w-4 h-4 sm:w-5 sm:h-5 cursor-pointer" />
