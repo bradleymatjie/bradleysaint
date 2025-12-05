@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { Resend } from 'resend';
+import { toast } from 'sonner';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
@@ -54,8 +55,8 @@ export async function POST(request: NextRequest) {
         `,
       });
     } catch (emailError) {
+      toast.error("could not send confirmation email please try again.")
       console.error('Resend email error:', emailError);
-      // Don't fail the whole request—DB save succeeded
     }
 
     return NextResponse.json({ success: true, message: 'Signed up!' }, { status: 200 });
