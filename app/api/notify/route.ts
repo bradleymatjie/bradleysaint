@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
         `,
       });
     } catch (emailError) {
-      toast.error("could not send confirmation email please try again.")
+      // toast.error("could not send confirmation email please try again.")
       console.error('Resend email error:', emailError);
     }
 
