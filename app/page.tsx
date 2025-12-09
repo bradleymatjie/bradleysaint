@@ -1,6 +1,4 @@
 import { ChevronRight } from 'lucide-react';
-import BestSeller from './components/bestSeller/bestSeller';
-import Collaboration from './components/Collaborate/collaborate';
 import Link from 'next/link';
 
 export default function Page() {
@@ -34,11 +32,7 @@ export default function Page() {
           </div>
         </div>
       </section>
-      {/* Collaboration Section */}
-        <Collaboration />
-      {/* Best Sellers Section */}
-      <BestSeller />
-      {/* Featured Banner */}
+
       <section className="bg-black text-white py-12 sm:py-16 lg:py-20 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-center">

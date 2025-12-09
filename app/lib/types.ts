@@ -13,8 +13,21 @@ export interface Product {
     price: string;
     category?: string;
     soldOut?: boolean;
-    imageUrl: string;
+    imageurl: string;
     description?: string;
     availableSizes: string[];
     availableMaterials: string[];
+}
+
+export interface ProductInput {
+  slug: string;
+  name: string;
+  price: number;
+  category: string;
+  sold_out?: boolean;
+  image_url?: string;
+  description?: string;
+  available_sizes?: string[];
+  available_materials?: string[];
+  stock?: number;
 }

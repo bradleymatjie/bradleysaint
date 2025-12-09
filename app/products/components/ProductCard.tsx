@@ -22,9 +22,9 @@ export default function ProductCard({ product, className = '' }: ProductCardProp
     e.preventDefault();
     e.stopPropagation();
 
-    // Default options for quick-add
-    const defaultSize = 'M';
-    const defaultMaterial = 'Cotton';
+    // Get default options from product or use fallbacks
+    const defaultSize = product.availableSizes?.[0] || 'M';
+    const defaultMaterial = product.availableMaterials?.[0] || 'Cotton';
 
     addItem(product, defaultSize, defaultMaterial);
 
@@ -32,14 +32,33 @@ export default function ProductCard({ product, className = '' }: ProductCardProp
     setTimeout(() => setIsAdded(false), 2000);
   };
 
+  // Handle both database fields (imageurl) and mock data (imageUrl)
+  const imageUrl = product.imageurl || '/placeholder-product.jpg';
+  debugger;
+  
+  // Handle both database fields (soldout) and mock data (soldOut)
+  const isSoldOut = product.soldOut ?? product.soldOut ?? false;
+
+  // Format price - handle both string and number
+  const formattedPrice = typeof product.price === 'string' 
+    ? product.price.startsWith('R') ? product.price : `R${product.price}`
+    : `R${product.price}`;
+
   return (
     <Link href={`/products/${product.id}`} className={`block group ${className}`}>
       <div className="relative overflow-hidden rounded-md border border-white/20 hover:border-white/50 transition-all bg-white/10">
         
+        {/* SOLD OUT BADGE */}
+        {isSoldOut && (
+          <div className="absolute top-2 left-2 z-10 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+            SOLD OUT
+          </div>
+        )}
+
         {/* IMAGE */}
         <div className="aspect-square relative">
           <Image
-            src={product.imageUrl || '/placeholder-product.jpg'}
+            src={imageUrl}
             alt={product.name}
             fill
             className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -62,10 +81,10 @@ export default function ProductCard({ product, className = '' }: ProductCardProp
 
           <div className="flex justify-between items-end pt-1">
             <p className="text-white font-bold text-lg sm:text-xl leading-none">
-              {product.price}
+              {formattedPrice}
             </p>
 
-            {!product.soldOut && (
+            {!isSoldOut && (
               <button
                 onClick={(e) => handleAddToCart(e, product)}
                 className={`py-1.5 px-3 rounded-md font-semibold text-xs transition-all duration-300 flex items-center justify-center gap-1.5 whitespace-nowrap ${

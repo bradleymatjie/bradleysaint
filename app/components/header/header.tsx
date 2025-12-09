@@ -7,19 +7,22 @@ import { useUser } from "@/app/lib/user";
 import { useCartStore } from "@/app/lib/cartStore";
 import { Button } from "@/components/ui/button";
 import CartSidebar from "./CartSidebar";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { user } = useUser();
+  const pathname = usePathname();
   
-  // --- FIX APPLIED HERE ---
-  // The hook now directly selects the result of getTotalItems()
   const cartItemCount = useCartStore((state) => state.getTotalItems()); 
-  // -------------------------
 
   const firstName = user?.user_metadata?.full_name?.split(" ")[0] || "";
   const isLoggedIn = !!user;
+
+  if (pathname.includes("admin")) {
+    return null;
+  }
 
   return (
     <>

@@ -65,7 +65,7 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                     {/* Product Image */}
                     <div className="relative w-20 h-20 flex-shrink-0 rounded-md overflow-hidden border border-gray-200">
                       <Image
-                        src={item.imageUrl}
+                        src={item.imageurl||"/noImage.jpg"}
                         alt={item.name}
                         fill
                         className="object-cover"

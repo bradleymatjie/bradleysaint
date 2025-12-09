@@ -14,10 +14,28 @@ interface ProductPageClientProps {
 export default function ProductPageClient({ product }: ProductPageClientProps) {
   const addItem = useCartStore((state) => state.addItem);
 
-  const [selectedSize, setSelectedSize] = useState<string>("M");
-  const [selectedMaterial, setSelectedMaterial] = useState<string>("100% Cotton");
+  // Get available sizes and materials from product, with fallbacks
+  const availableSizes = product.availableSizes && product.availableSizes.length > 0 
+    ? product.availableSizes 
+    : ["S", "M", "L", "XL"];
+  
+  const availableMaterials = product.availableMaterials && product.availableMaterials.length > 0 
+    ? product.availableMaterials 
+    : ["100% Cotton"];
+
+  const [selectedSize, setSelectedSize] = useState<string>(availableSizes[0]);
+  const [selectedMaterial, setSelectedMaterial] = useState<string>(availableMaterials[0]);
 
   const [isAdded, setIsAdded] = useState(false);
+
+  // Handle both database field names (imageurl, soldout) and mock data (imageUrl, soldOut)
+  const imageUrl = product.imageurl ||'/placeholder-product.jpg';
+  const isSoldOut = product.soldOut ?? product.soldOut ?? false;
+  
+  // Format price
+  const formattedPrice = typeof product.price === 'string' 
+    ? product.price.startsWith('R') ? product.price : `R${product.price}`
+    : `R${product.price}`;
 
   const handleAddToCart = () => {
     addItem(product, selectedSize, selectedMaterial);
@@ -43,13 +61,13 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
           {/* Hero Image */}
           <div className="relative aspect-square rounded-md overflow-hidden border border-white/20 group">
             <Image
-              src={product.imageUrl || '/placeholder-product.jpg'}
+              src={imageUrl||"/noImage.jpg"}
               alt={product.name}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-300"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
-            {product.soldOut && (
+            {isSoldOut && (
               <div className="absolute inset-0 bg-black/60 flex items-center justify-center z-10">
                 <span className="text-white font-bold text-xl uppercase tracking-wide px-4 py-2 bg-black/30 rounded-full">
                   Sold Out
@@ -71,7 +89,7 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
               {product.name}
             </h1>
 
-            <p className="text-3xl font-bold text-white">{product.price}</p>
+            <p className="text-3xl font-bold text-white">{formattedPrice}</p>
 
             {product.description && (
               <div className="prose prose-invert max-w-none text-gray-300 leading-relaxed">
@@ -80,46 +98,52 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
             )}
 
             {/* ========== SIZE SELECTOR ========== */}
-            <div className="space-y-2">
-              <p className="font-medium text-gray-300">Select Size</p>
+            {availableSizes.length > 0 && (
+              <div className="space-y-2">
+                <p className="font-medium text-gray-300">Select Size</p>
 
-              <div className="flex gap-2">
-                {["S", "M", "L", "XL"].map((size) => (
-                  <button
-                    key={size}
-                    onClick={() => setSelectedSize(size)}
-                    className={`px-4 py-2 border rounded-md transition-all ${
-                      selectedSize === size
-                        ? "bg-white text-black"
-                        : "border-white/20 text-gray-300 hover:border-white/40"
-                    }`}
-                  >
-                    {size}
-                  </button>
-                ))}
+                <div className="flex flex-wrap gap-2">
+                  {availableSizes.map((size) => (
+                    <button
+                      key={size}
+                      onClick={() => setSelectedSize(size)}
+                      disabled={isSoldOut}
+                      className={`px-4 py-2 border rounded-md transition-all ${
+                        selectedSize === size
+                          ? "bg-white text-black"
+                          : "border-white/20 text-gray-300 hover:border-white/40"
+                      } ${isSoldOut ? "opacity-50 cursor-not-allowed" : ""}`}
+                    >
+                      {size}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* ========== MATERIAL SELECTOR ========== */}
-            <div className="space-y-2">
-              <p className="font-medium text-gray-300">Select Material</p>
+            {availableMaterials.length > 0 && (
+              <div className="space-y-2">
+                <p className="font-medium text-gray-300">Select Material</p>
 
-              <div className="flex gap-2">
-                {["100% Cotton"].map((mat) => (
-                  <button
-                    key={mat}
-                    onClick={() => setSelectedMaterial(mat)}
-                    className={`px-4 py-2 border rounded-md transition-all ${
-                      selectedMaterial === mat
-                        ? "bg-white text-black"
-                        : "border-white/20 text-gray-300 hover:border-white/40"
-                    }`}
-                  >
-                    {mat}
-                  </button>
-                ))}
+                <div className="flex flex-wrap gap-2">
+                  {availableMaterials.map((mat) => (
+                    <button
+                      key={mat}
+                      onClick={() => setSelectedMaterial(mat)}
+                      disabled={isSoldOut}
+                      className={`px-4 py-2 border rounded-md transition-all ${
+                        selectedMaterial === mat
+                          ? "bg-white text-black"
+                          : "border-white/20 text-gray-300 hover:border-white/40"
+                      } ${isSoldOut ? "opacity-50 cursor-not-allowed" : ""}`}
+                    >
+                      {mat}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* ACTION BUTTONS */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
@@ -129,10 +153,10 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                   isAdded
                     ? "bg-green-600 text-white"
                     : "bg-white text-black hover:bg-gray-100"
-                }`}
-                disabled={product.soldOut}
+                } ${isSoldOut ? "opacity-50 cursor-not-allowed" : ""}`}
+                disabled={isSoldOut}
               >
-                {product.soldOut
+                {isSoldOut
                   ? "Sold Out"
                   : isAdded
                   ? "✓ Added to Cart"
@@ -140,10 +164,12 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
               </button>
 
               <Link
-                href={product.soldOut ? "#" : "/checkout"}
-                className="py-4 px-6 border border-white/20 rounded-md font-bold text-center hover:border-white/50 transition-colors"
+                href={isSoldOut ? "#" : "/checkout"}
+                className={`py-4 px-6 border border-white/20 rounded-md font-bold text-center hover:border-white/50 transition-colors ${
+                  isSoldOut ? "opacity-50 cursor-not-allowed pointer-events-none" : ""
+                }`}
               >
-                {product.soldOut ? "Sold Out" : "Buy Now"}
+                {isSoldOut ? "Sold Out" : "Buy Now"}
               </Link>
             </div>
 
