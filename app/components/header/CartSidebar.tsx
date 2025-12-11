@@ -136,8 +136,8 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                   R{totalPrice.toFixed(2)}
                 </span>
               </div>
-              <p className="text-xs text-gray-500">
-                Shipping and taxes calculated at checkout
+              <p className="text-xs text-gray-500 text-center">
+                Shipping prices calculated at checkout
               </p>
               <Link
                 href="/checkout"

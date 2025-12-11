@@ -416,7 +416,7 @@ export default function ProductsPage() {
                 </div>
                 <div className="p-4">
                   <h3 className="font-semibold text-lg mb-1 truncate">{product.name}</h3>
-                  <p className="text-xl font-bold mb-2">${product.price}</p>
+                  <p className="text-xl font-bold mb-2">R{product.price}</p>
                   {product.category && (
                     <p className="text-xs text-gray-400 uppercase mb-2">{product.category}</p>
                   )}

@@ -49,9 +49,9 @@ export default function Page() {
                 REDEFINING STREETWEAR WITH<br />
                 UNMATCHED EDGE AND VISION.
               </h2>
-              <button className="bg-white text-black px-6 sm:px-8 py-2.5 sm:py-3 font-bold text-xs sm:text-sm hover:bg-gray-200 transition-colors">
+              <Link href="/products" className="bg-white text-black px-6 sm:px-8 py-2.5 sm:py-3 font-bold text-xs sm:text-sm hover:bg-gray-200 transition-colors">
                 EXPLORE DESIGNS
-              </button>
+              </Link>
             </div>
           </div>
         </div>
